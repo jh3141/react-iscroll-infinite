@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Infinite scrolling demo</title>
+    <meta charset="utf-8" />
+</head>
+
+<script>
+    // run this before babel-standalone to make sure anything exported from a module
+    // is made available in global scope...
+    window.exports = window;
+    function require (module) {
+        if (module === "react")  return React;
+        if (module === "react-dom")  return ReactDOM;
+        if (module === "react-iscroll")  return ReactIScroll;
+    }
+    window.process = {  // the ReactIScroll component attempts to read this, so it must exist:
+        env: { NODE_ENV: "production" } // if this isn't production, attempts to load "./prop_types", which just plain doesn't work...
+    };
+
+</script>
+
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/react@15.5.4/dist/react.min.js"></script>
+<script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/react-iscroll@2.0.3/dist/react-iscroll.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll-probe.min.js"></script>
+<script type="text/jsx" data-presets="es2015, react" src="src/index.jsx"></script>
+<script type="text/jsx" data-presets="es2015, react">
+    class App extends React.Component
+    {
+        render () {
+            return (
+                <InfiniteScroller iScroll={IScroll} initialMin={0} initialMax={50} callback={index => {
+                    console.log ("Generating element " + index);
+                    return <div>Element #{index}</div>;
+                }} />
+            );
+        }
+    }
+    function startApp ()
+    {
+        ReactDOM.render(<App/>, document.getElementById("app"));
+    }
+</script>
+
+<style type="text/css">
+.InfiniteScroller {
+     border: 1px solid black;
+     margin: 1em;
+     width: 240px;
+     height: 400px;
+}
+</style>
+<body onload="window.setTimeout(function () { startApp() },1000)">
+<h1>Infinite scrolling demo</h1>
+<div id="app"></div>
+</body>
+</html>

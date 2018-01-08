@@ -1,0 +1,23 @@
+{
+  "name": "react-iscroll-infinite",
+  "version": "1.0.0",
+  "description": "Infinite scrolling using the iScroll library in a React component",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build",
+    "demo": "static-server -p 8800 -i demo.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julian Hall <jh314159@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+      "react-iscroll": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "static-server": "^2.0.5"
+  }
+}
